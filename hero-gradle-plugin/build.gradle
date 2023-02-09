@@ -4,6 +4,8 @@ apply plugin: 'java-gradle-plugin'
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
+apply plugin: 'maven-publish'
+
 dependencies {
     //gradle sdk
     implementation gradleApi()
@@ -11,12 +13,13 @@ dependencies {
     implementation localGroovy()
 }
 //组名，可以理解为分组名，插件的文件夹目录就可以作为分组名
-group = 'com.hero.gradle'
+group = 'com.hero.gradle.plugin'
 
-description ='这是一个独立插件，可以任意插拔使用'
+description = '这是一个独立插件，可以任意插拔使用'
 
 version = '1.0.0'
 
+//用于上传本地或者远程
 uploadArchives {
     repositories {
         mavenDeployer {
@@ -29,11 +32,26 @@ uploadArchives {
         }
     }
 
+    //用于发布使用
+    publishing {
+
+
+        publications {
+            mavenJava(MavenPublication) {
+                groupId = 'com.hero.gradle.plugin'
+                artifactId = 'hero-plugin'
+                version = '1.1'
+
+                from components.java
+            }
+        }
+    }
+
 
     buildscript {
         repositories {
-//            google()
-//            mavenCentral()
+            google()
+            mavenCentral()
         }
         dependencies {
         }
@@ -54,8 +72,7 @@ uploadArchives {
 
 
     repositories {
-//        google()
-//        mavenCentral()
+        mavenCentral()
     }
 
 }

@@ -5,7 +5,9 @@ apply plugin: HeroCreatePlugin
 apply plugin: 'com.heroz.plugin'
 
 //引入远程的插件id
-apply plugin: 'com.hero.gradle'
+apply plugin: 'com.petterp.gradle.stand'
+
+//apply plugin: 'com.hero.gradle.plugin'
 
 
 class HeroCreatePlugin implements Plugin<Project>{
