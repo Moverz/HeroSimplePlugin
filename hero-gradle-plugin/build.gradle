@@ -1,0 +1,61 @@
+apply plugin: 'java-gradle-plugin'
+
+
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    //gradle sdk
+    implementation gradleApi()
+    //groovy sdk
+    implementation localGroovy()
+}
+//组名，可以理解为分组名，插件的文件夹目录就可以作为分组名
+group = 'com.hero.gradle'
+
+description ='这是一个独立插件，可以任意插拔使用'
+
+version = '1.0.0'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //本地的Maven地址:项目本地的repo目录下
+            repository(url: uri('../repo'))
+            //提交到远程服务器：
+            // repository(url: "http://www.xxx.com/repos") {
+            //    authentication(userName: "admin", password: "admin")
+            // }
+        }
+    }
+
+
+    buildscript {
+        repositories {
+//            google()
+//            mavenCentral()
+        }
+        dependencies {
+        }
+    }
+
+//本地依赖插件时候使用
+    gradlePlugin {
+        plugins {
+            //插件名 可以自己定义 以key的形式
+            routerPlugin {
+                //插件id 外部项目引用时需要使用
+                id = 'com.hero.gradle.plugin'
+                //具体实现类这里为插件类的路径
+                implementationClass = 'com.hero.gradle.HeroSimplePlugin'
+            }
+        }
+    }
+
+
+    repositories {
+//        google()
+//        mavenCentral()
+    }
+
+}

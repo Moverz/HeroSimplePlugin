@@ -1,0 +1,32 @@
+apply plugin: 'java-gradle-plugin'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+
+    }
+}
+
+//本地依赖插件时候使用
+gradlePlugin{
+    plugins{
+        //插件名 可以自己定义 以key的形式
+        buildSrcPlugin{
+            //插件id 外部项目引用时需要使用
+            id ='com.heroz.plugin'
+            //具体实现类这里为插件类的路径
+            implementationClass = 'com.heroz.PluginJar'
+        }
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+dependencies {
+}
